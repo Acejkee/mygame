@@ -3,48 +3,41 @@ import pygame
 pygame.init()
 
 W, H = 600, 400
-WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
 
-sc = pygame.display.set_mode((W, H))
-pygame.display.set_caption("My first game :)")
+sc = pygame.display.set_mode((600, 400))
+pygame.display.set_caption("Шрифты")
 
-FPS = 60
 clock = pygame.time.Clock()
+FPS = 60
 
-ground = H - 70
-jump_force = 20
-move = jump_force + 1
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+YELLOW = (239, 228, 176)
 
-hero = pygame.Surface((40, 50))
-hero.fill(BLUE)
-rect = hero.get_rect(centerx=W // 2)
-rect.bottom = ground
+f = pygame.font.SysFont(None, 24)
+sc_text = f.render("Привет, мир!", 1, RED, YELLOW)
+pos = sc_text.get_rect(center=(W // 2, H // 2))
 
-rect_update = pygame.Rect(rect.x, 0, rect.width, ground)
-sc.fill(WHITE)
-pygame.display.update()
+
+def draw_text():
+    sc.fill(WHITE)
+    sc.blit(sc_text, pos)
+    pygame.display.update()
+
+
+draw_text()
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE and ground == rect.bottom:
-                move = -jump_force
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            pygame.mouse.get_rel()
 
-        if move <= jump_force:
-            if rect.bottom + move < ground:
-                rect.bottom += move
-                if move < jump_force:
-                    move += 1
-            else:
-                rect.bottom = ground
-                move = jump_force + 1
-        sc.fill(WHITE)
-        sc.blit(hero, rect)
-        pygame.display.update(rect_update)
-
-    clock.tick(FPS)
+    if pygame.mouse.get_focused() and pos.collidepoint(pygame.mouse.get_pos()):
+        btns = pygame.mouse.get_pressed()
+        if btns[0]:
+            rel = pygame.mouse.get_rel()
+            pos.move_ip(rel)
+            draw_text()
+        clock.tick(FPS)
