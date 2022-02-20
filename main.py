@@ -7,7 +7,7 @@ pygame.init()
 
 pygame.time.set_timer(pygame.USEREVENT, 2000)
 
-pygame.mixer.music.load("C:\\Users\\belou\Desktop\\house_lo.mp3")
+pygame.mixer.music.load("Sounds\\house_lo.mp3")
 pygame.mixer.music.play(-1)
 
 BLACK = (0, 0, 0)
@@ -15,12 +15,12 @@ BLACK = (0, 0, 0)
 W, H = 1200, 580
 sc = pygame.display.set_mode((W, H))
 
-bg = pygame.image.load('C:\\Users\\belou\Desktop\\images\\back1.jpg').convert()
+bg = pygame.image.load('images\\back1.jpg').convert()
 
-score = pygame.image.load("C:\\Users\\belou\Desktop\\images\\score_fon.png").convert_alpha()
+score = pygame.image.load("images\\score_fon.png").convert_alpha()
 f = pygame.font.SysFont('arial', 30)
 
-telega = pygame.image.load("C:\\Users\\belou\Desktop\\images\\telega.png").convert_alpha()
+telega = pygame.image.load("images\\telega.png").convert_alpha()
 t_rect = telega.get_rect(centerx=W // 2, bottom=H - 5)
 
 clock = pygame.time.Clock()
@@ -30,7 +30,7 @@ balls_data = ({'path': 'ball_bear.png', 'score': 100},
               {'path': 'ball_fox.png', 'score': 150},
               {'path': 'ball_fox.png', 'score': 200})
 
-balls_surf = [pygame.image.load('C:\\Users\\belou\Desktop\\images\\' + data['path']).convert_alpha() for data in
+balls_surf = [pygame.image.load('images\\' + data['path']).convert_alpha() for data in
               balls_data]
 
 balls = pygame.sprite.Group()
